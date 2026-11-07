@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://ali-ioi.github.io/sitemap.xml
+Sitemap: https://ali-ioi.github.io/CAFETERIA-PRE-ORDER-SYSTEM/sitemap.xml
+Sitemap: https://ali-ioi.github.io/INFINITE-APPROXIMATION/sitemap.xml
+Sitemap: https://ali-ioi.github.io/RIHITOS-JOURNAL/sitemap.xml

@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rihito (ALI-IOI) – projects</title>
+<meta name="description" content="Projects by Rihito (ALI-IOI), a CSE student in Bangladesh: a cafeteria pre-order system in C++ running as WebAssembly, an orthogonal-trajectories solver, and a robotics learning journal.">
+<meta name="author" content="Rihito">
+<link rel="canonical" href="https://ali-ioi.github.io/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://ali-ioi.github.io/">
+<meta property="og:title" content="Rihito (ALI-IOI) – projects">
+<meta property="og:description" content="C++, data structures and WebAssembly, and a robotics journal on the way to autonomous drones.">
+<meta name="twitter:card" content="summary">
+<meta name="theme-color" content="#f6f7f9" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#101318" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23101318'/%3E%3Ctext x='16' y='23' font-family='Arial,sans-serif' font-size='19' font-weight='800' text-anchor='middle' fill='%23ffffff'%3ER%3C/text%3E%3C/svg%3E">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Person","name":"Rihito","alternateName":"ALI-IOI","url":"https://ali-ioi.github.io/","sameAs":["https://github.com/ALI-IOI"]}
+</script>
+<style>
+  :root {
+    --bg: #f6f7f9; --surface: #ffffff; --ink: #14181f; --muted: #545c69; --line: #dde1e7;
+    --accent: #0b5cad; --accent-ink: #ffffff; --tag: #eef1f5;
+    --radius: 14px;
+    --font: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans", Arial, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #101318; --surface: #171b22; --ink: #e9edf2; --muted: #a3acb9; --line: #2a303a;
+            --accent: #6cb0ff; --accent-ink: #0b1220; --tag: #222833; }
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.6 var(--font); }
+  a { color: var(--accent); }
+  a:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+  .wrap { max-width: 880px; margin: 0 auto; padding: 0 16px; }
+  header { padding: 72px 0 40px; }
+  h1 { font-size: clamp(2rem, 6vw, 3rem); line-height: 1.1; margin: 0 0 12px; letter-spacing: -0.02em; }
+  h1 small { display: block; font-size: 1rem; font-weight: 600; color: var(--muted); letter-spacing: 0; margin-top: 8px; }
+  .lede { font-size: 1.125rem; color: var(--muted); max-width: 38rem; margin: 0; }
+  h2 { font-size: 0.8125rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); margin: 0 0 16px; }
+  .projects { list-style: none; margin: 0; padding: 0; display: grid; gap: 16px; }
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 24px; }
+  .card h3 { font-size: 1.25rem; margin: 0 0 8px; }
+  .card p { margin: 0 0 16px; color: var(--muted); }
+  .tags { list-style: none; margin: 0 0 20px; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+  .tags li { background: var(--tag); border-radius: 999px; padding: 2px 10px; font-size: 0.8125rem; color: var(--ink); }
+  .links { display: flex; flex-wrap: wrap; gap: 12px; }
+  .btn { display: inline-block; padding: 8px 16px; border-radius: 8px; font-weight: 600; text-decoration: none; border: 1px solid var(--accent); }
+  .btn--primary { background: var(--accent); color: var(--accent-ink); }
+  .btn--plain { color: var(--accent); }
+  .logins { margin: 0 0 16px; padding-left: 20px; color: var(--muted); }
+  section { padding: 24px 0 48px; }
+  footer { border-top: 1px solid var(--line); padding: 24px 0 48px; color: var(--muted); font-size: 0.9375rem; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Rihito <small>ALI-IOI on GitHub</small></h1>
+    <p class="lede">CSE student in Bangladesh. C++, data structures and WebAssembly. Teaching myself robotics on the way to autonomous drones (Flight Path 2029).</p>
+  </header>
+
+  <main>
+    <section aria-labelledby="projects">
+      <h2 id="projects">Projects</h2>
+      <ul class="projects">
+        <li class="card">
+          <h3>Cafeteria pre-order system</h3>
+          <p>Everyone at the university reserves freshly cooked food before a cutoff, the kitchen marks it ready and everyone gets an email. A C++17 server built on hand-made data structures (array, linked list, circular queue, stack), with Argon2 password hashing. The live demo runs the real C++ server in your browser as WebAssembly.</p>
+          <ul class="tags" aria-label="Built with"><li>C++17</li><li>Data structures</li><li>WebAssembly</li><li>libsodium</li></ul>
+          <ul class="logins">
+            <li>Students, teachers and university staff: <a href="https://ali-ioi.github.io/CAFETERIA-PRE-ORDER-SYSTEM/login.html">public login</a></li>
+            <li>Cafeteria staff: <a href="https://ali-ioi.github.io/CAFETERIA-PRE-ORDER-SYSTEM/staff/login.html">staff login</a></li>
+          </ul>
+          <div class="links">
+            <a class="btn btn--primary" href="https://ali-ioi.github.io/CAFETERIA-PRE-ORDER-SYSTEM/">Live demo</a>
+            <a class="btn btn--plain" href="https://github.com/ALI-IOI/CAFETERIA-PRE-ORDER-SYSTEM">Source code</a>
+          </div>
+        </li>
+        <li class="card">
+          <h3>INFINITE-APPROXIMATION</h3>
+          <p>Type a family of curves and see its orthogonal trajectories, with a right-angle mark at every crossing. All the mathematics is written in C++ and runs in the browser as WebAssembly.</p>
+          <ul class="tags" aria-label="Built with"><li>C++</li><li>WebAssembly</li><li>Differential equations</li></ul>
+          <div class="links">
+            <a class="btn btn--primary" href="https://ali-ioi.github.io/INFINITE-APPROXIMATION/">Open it</a>
+            <a class="btn btn--plain" href="https://github.com/ALI-IOI/INFINITE-APPROXIMATION">Source code</a>
+          </div>
+        </li>
+        <li class="card">
+          <h3>Rihito's Journal</h3>
+          <p>My Flight Path 2029 tracker: every build, gate and test flight from a first Arduino circuit to ESP32, ROS 2, autonomous drones and a research Masters, with a daily tracker.</p>
+          <ul class="tags" aria-label="Built with"><li>JavaScript</li><li>three.js</li><li>Robotics</li></ul>
+          <div class="links">
+            <a class="btn btn--primary" href="https://ali-ioi.github.io/RIHITOS-JOURNAL/">Open the journal</a>
+            <a class="btn btn--plain" href="https://github.com/ALI-IOI/RIHITOS-JOURNAL">Source code</a>
+          </div>
+        </li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    <p>More on GitHub: <a href="https://github.com/ALI-IOI">github.com/ALI-IOI</a></p>
+  </footer>
+</div>
+</body>
+</html>
