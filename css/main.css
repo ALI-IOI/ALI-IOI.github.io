@@ -1,0 +1,255 @@
+/* Grimoire. Tokens follow the choices saved from design-options/grimoire-design-options.html:
+   dark = Dragon's blood (#6A0D0D), blackletter + EB Garamond; light = Gold (#FFD700), Cinzel Decorative + Cormorant.
+   --fill is the chosen colour for edges and filled shapes; --accent is a readable tint of it for text and thin lines. */
+[hidden]{display:none!important}
+:root{
+  --bg:#eef2fb; --fg:#140f26; --muted:#4e5275; --faint:#8b90b6;
+  --accent:#8a6a00; --fill:#ffd700; --on-fill:#2a1f00; --accent-soft:rgba(96,200,150,.26);
+  --line:rgba(20,15,38,.18); --smoke-rgb:70,120,95;
+  --glass:rgba(255,255,255,.55); --rim:rgba(20,15,38,.22);
+  --nb:rgba(255,255,255,.3); --nd:rgba(110,120,150,.42); --nl:rgba(255,255,255,.9); --ridge:rgba(90,100,130,.28); --thumb:#f4f6fb;
+  --up:6px 6px 12px var(--nd),-6px -6px 12px var(--nl); --in:inset 4px 4px 8px var(--nd),inset -4px -4px 8px var(--nl);
+  --f-display:"Cinzel Decorative","Cormorant Garamond",Georgia,serif;
+  --f-body:"Cormorant Garamond",Georgia,"Times New Roman",serif;
+  --fs:18px;
+  color-scheme:light;
+}
+:root[data-theme="dark"]{
+  --bg:#07060d; --fg:#f3e9ea; --muted:#b59a9f; --faint:#6e4a52;
+  --accent:#e2524b; --fill:#6a0d0d; --on-fill:#f8e9e7; --accent-soft:rgba(106,13,13,.34);
+  --line:rgba(226,82,75,.22); --smoke-rgb:215,210,222;
+  --glass:rgba(255,255,255,.1); --rim:rgba(255,255,255,.2);
+  --nb:rgba(60,20,26,.22); --nd:rgba(0,0,0,.6); --nl:rgba(255,255,255,.07); --ridge:rgba(0,0,0,.42); --thumb:#2a2530;
+  --f-display:"UnifrakturMaguntia","EB Garamond",Georgia,serif;
+  --f-body:"EB Garamond",Georgia,"Times New Roman",serif;
+  --fs:17px;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;overflow:hidden;overscroll-behavior:none}
+body{background:var(--bg);color:var(--fg);font:500 var(--fs)/1.5 var(--f-body);-webkit-font-smoothing:antialiased;transition:background-color .8s ease,color .8s ease}
+a{color:inherit}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+::selection{background:var(--fill);color:var(--on-fill)}
+.wrap{max-width:1440px;margin:0 auto;padding-inline:24px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+
+/* scanlines over everything, as in the journal */
+body::after{content:"";position:fixed;inset:0;z-index:80;pointer-events:none;background:repeating-linear-gradient(0deg,rgba(255,255,255,.03) 0 1px,transparent 1px 3px),radial-gradient(120% 90% at 50% 50%,transparent 60%,rgba(0,0,0,.35));mix-blend-mode:overlay}
+:root[data-theme="light"] body::after{background:repeating-linear-gradient(0deg,rgba(20,15,38,.035) 0 1px,transparent 1px 3px);mix-blend-mode:multiply}
+
+#scene{position:fixed;inset:0;z-index:-2;width:100%;height:100%;display:block}
+.aura{position:fixed;inset:0;z-index:-3;pointer-events:none;background:radial-gradient(42% 46% at 50% 50%,var(--accent-soft),transparent 70%);transition:background .8s ease}
+.vignette{position:fixed;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(120% 90% at 50% 45%,transparent 55%,color-mix(in srgb,var(--bg) 70%,transparent) 100%)}
+
+/* FG6 crimson fog: dark mode only, in the chosen red */
+.fog{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden;opacity:0;transition:opacity .8s ease}
+:root[data-theme="dark"] .fog{opacity:1}
+.fog i{position:absolute;inset:-50%;background:radial-gradient(closest-side at 25% 45%,rgba(106,13,13,.55),transparent),radial-gradient(closest-side at 65% 65%,rgba(70,6,6,.6),transparent),radial-gradient(closest-side at 85% 30%,rgba(140,24,24,.3),transparent);animation:drift 15s ease-in-out infinite alternate}
+.fog i+i{transform:scale(1.3);opacity:.6;animation-duration:23s;animation-direction:alternate-reverse}
+@keyframes drift{from{translate:-9% 0}to{translate:9% 0}}
+
+/* S9 parallax smoke: three bands at three speeds; each band's pattern repeats at half its width, so the loop is seamless */
+.smoke{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden;opacity:.32}
+:root[data-theme="light"] .smoke{opacity:.16}
+.smoke i{position:absolute;left:0;width:200%;filter:blur(14px);background:radial-gradient(closest-side at 16% 50%,rgba(var(--smoke-rgb),.34),transparent),radial-gradient(closest-side at 50% 44%,rgba(var(--smoke-rgb),.22),transparent),radial-gradient(closest-side at 84% 56%,rgba(var(--smoke-rgb),.3),transparent);background-size:50% 100%;animation:slide 18s linear infinite}
+.smoke i:nth-child(1){top:12%;height:130px}
+.smoke i:nth-child(2){top:42%;height:160px;animation-duration:28s}
+.smoke i:nth-child(3){top:68%;height:190px;animation-duration:40s}
+@keyframes slide{from{transform:translateX(-50%)}to{transform:translateX(0)}}
+body.calm .fog i,body.calm .smoke i{animation-play-state:paused}
+
+/* GL8 specular-edge glass */
+.glass{background:linear-gradient(135deg,rgba(255,255,255,.28),rgba(255,255,255,.06) 40%,rgba(255,255,255,.02) 60%,rgba(255,255,255,.14)),var(--glass);
+  -webkit-backdrop-filter:blur(10px) saturate(180%);backdrop-filter:blur(10px) saturate(180%);
+  border:1px solid var(--rim);box-shadow:inset 1px 1px 0 rgba(255,255,255,.5),inset -1px -1px 0 rgba(0,0,0,.18),0 10px 30px rgba(0,0,0,.25)}
+:root[data-theme="dark"] .glass{background:linear-gradient(135deg,rgba(255,255,255,.16),rgba(255,255,255,.04) 40%,rgba(255,255,255,.01) 60%,rgba(255,255,255,.08)),rgba(10,8,14,.62);box-shadow:inset 1px 1px 0 rgba(255,255,255,.28),inset -1px -1px 0 rgba(0,0,0,.4),0 10px 30px rgba(0,0,0,.5)}
+
+/* B9 ink underline on an F9 glass face: the underline rises to fill the button */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:8px 16px;border:1px solid var(--rim);border-radius:6px;cursor:pointer;text-decoration:none;color:var(--fg);font:600 var(--fs)/1 var(--f-body);letter-spacing:.02em;white-space:nowrap;
+  background:linear-gradient(var(--fill),var(--fill)) 0 100%/100% 2px no-repeat,var(--glass);
+  -webkit-backdrop-filter:blur(12px) saturate(160%);backdrop-filter:blur(12px) saturate(160%);box-shadow:inset 0 1px 0 rgba(255,255,255,.3);transition:background-size .3s,color .3s}
+.btn:hover,.btn:focus-visible{background-size:100% 100%,auto;color:var(--on-fill)}
+/* gold is too faint as a thin line on light glass, so in light mode the resting underline is dark gilt and the fill stays gold */
+:root[data-theme="light"] .btn{background-size:100% 0,auto;box-shadow:inset 0 1px 0 rgba(255,255,255,.3),inset 0 -2px 0 var(--accent)}
+:root[data-theme="light"] .btn:hover,:root[data-theme="light"] .btn:focus-visible{background-size:100% 100%,auto}
+
+.top{position:fixed;top:env(safe-area-inset-top,0px);left:0;right:0;z-index:31;padding-block:14px}
+.top .wrap{display:flex;align-items:center;gap:18px}
+.brand{display:flex;align-items:center;gap:10px;white-space:nowrap;text-decoration:none;min-height:44px}
+.brand-n{display:inline-block;font:700 30px/1 var(--f-display)}
+:root[data-theme="light"] .brand-n{font-size:24px;letter-spacing:.04em}
+.right{margin-left:auto;display:flex;align-items:center;gap:10px}
+
+/* N8 soft toggle for light / dark */
+/* the plates are frosted and see-through, so they take the colour of the fog and smoke behind them instead of sitting on it as a grey disc */
+.neu{display:inline-flex;align-items:center;padding:7px 9px;border-radius:999px;background:var(--nb);-webkit-backdrop-filter:blur(10px) saturate(140%);backdrop-filter:blur(10px) saturate(140%)}
+.tog{width:84px;height:44px;border-radius:999px;border:0;background:var(--nb);box-shadow:var(--in),inset 0 0 0 1.5px var(--muted);position:relative;cursor:pointer}
+.tog::after{content:"";position:absolute;top:6px;left:6px;width:32px;height:32px;border-radius:50%;background:var(--thumb);border:1.5px solid var(--muted);box-sizing:border-box;box-shadow:var(--up);transition:transform .25s,background .25s}
+.tog[aria-checked="true"]::after{transform:translateX(40px);background:var(--fill)}
+
+.stage{position:fixed;inset:0;z-index:1;touch-action:none;cursor:grab;display:grid;place-items:center}
+.stage.drag{cursor:grabbing}
+.nogl{margin:24px;padding:16px 20px;max-width:420px;text-align:center;border-radius:8px}
+
+/* bottom dock: IX6 sigil row */
+.dock{position:fixed;z-index:30;left:0;right:0;bottom:calc(env(safe-area-inset-bottom,0px) + 16px);display:flex;flex-direction:column;align-items:center;gap:10px;pointer-events:none}
+.dock>*{pointer-events:auto}
+.dock-row{display:flex;align-items:center;gap:18px}
+.sigils{display:flex;gap:8px}
+.sg{width:44px;height:44px;border-radius:50%;border:1.5px solid var(--fg);background:var(--bg);background:color-mix(in srgb,var(--bg) 70%,transparent);cursor:pointer;display:grid;place-items:center;font:500 16px/1 Arial,sans-serif;transition:background .25s,color .25s,border-color .25s}
+.sg[aria-current="true"]{background:var(--fill);border-color:var(--fill);color:var(--on-fill)}
+.sg:hover,.sg:focus-visible{background:transparent;border:1.5px dashed var(--muted);color:var(--muted)}  /* HV5 ghost outline */
+
+/* ---------- the full-size pages ----------
+   A spread opens over the book: two pages on wide screens, one page on narrow or tall ones. The canvas behind the
+   text carries the paper, ruling, stains and drawn art (js/site.js, using the book's pen in js/ink.js). The text is
+   written in scribal hands: Almendra for red rubrics, Fondamento (a chancery italic) for the writing. */
+.leaf{--paper:#efe3c6;--ink:#301f10;--line-ink:rgba(48,31,16,.45);--red:#8a1a12;--silk:#7a1010;--silk-ink:#f6ead0;--slip:#f6ecd4;
+  --wash:#8a1a12;--wash-ink:#f6ead0;--gilt:#ffd700;--gilt-2:#a8780a;--glow:transparent;--rglow:transparent;
+  --hand:"Fondamento",Georgia,serif;--rub:"Almendra",Georgia,serif;
+  position:fixed;inset:0;width:100%;height:100%;max-width:none;max-height:none;margin:0;padding:0;border:0;background:none;color:var(--ink);overflow:hidden}
+:root[data-theme="dark"] .leaf{--paper:#050404;--ink:#f4f0ea;--line-ink:rgba(244,240,234,.4);--red:#ff7062;--silk:#6a0d0d;--silk-ink:#f8e9e7;--slip:#0e0b0b;
+  --wash:#6a0d0d;--wash-ink:#f8e9e7;--gilt:#6a0d0d;--gilt-2:#3d0808;--glow:rgba(244,240,234,.3);--rglow:rgba(255,112,98,.4)}
+.leaf::backdrop{background:rgba(5,4,8,.8)}
+.pages{position:absolute;top:max(14px,2.5vh);bottom:max(14px,2.5vh);left:0;right:0;margin-inline:auto;width:min(calc(100% - 40px),calc(95vh * 1.46));
+  display:grid;grid-template-columns:1fr 1fr;background:var(--paper);animation:leafin .7s cubic-bezier(.2,.7,.2,1);
+  box-shadow:0 0 0 1px var(--gilt-2),-3px 3px 0 0 var(--paper),-3px 3px 0 1px var(--gilt),3px 3px 0 0 var(--paper),3px 3px 0 1px var(--gilt),
+    -6px 6px 0 0 var(--paper),-6px 6px 0 1px var(--gilt-2),6px 6px 0 0 var(--paper),6px 6px 0 1px var(--gilt-2),0 40px 90px rgba(0,0,0,.55)}
+:root[data-theme="dark"] .pages{box-shadow:0 0 0 1px var(--gilt),-3px 3px 0 0 var(--paper),-3px 3px 0 1px var(--gilt),3px 3px 0 0 var(--paper),3px 3px 0 1px var(--gilt),
+    -6px 6px 0 0 var(--paper),-6px 6px 0 1px var(--gilt-2),6px 6px 0 0 var(--paper),6px 6px 0 1px var(--gilt-2),0 0 60px rgba(160,20,20,.4),0 40px 90px rgba(0,0,0,.7)}
+@keyframes leafin{from{opacity:0;transform:perspective(1800px) rotateX(9deg) scale(.95)}to{opacity:1;transform:none}}
+.leaf-art{position:absolute;left:0;top:0;width:100%;height:100%;z-index:0;pointer-events:none}
+.page{position:relative;z-index:1;display:flex;flex-direction:column;gap:.55em;min-height:0;overflow:hidden;font:400 clamp(17px,1.3vw,21px)/1.55 var(--hand);text-shadow:0 0 6px var(--glow)}
+.verso{padding:max(7%,60px) 7% max(9%,64px) 11%}
+.recto{padding:max(7%,60px) 11% max(9%,64px) 7%}
+.page p{margin:0}
+.art{flex:none}
+.art.rubric{height:2.2em}
+.art.seal{align-self:center;width:min(80%,42vh);aspect-ratio:1}
+.art.table{height:24%;min-height:90px}
+.art.fill{flex:1 1 0;min-height:24px}
+.only-single{display:none}
+.title{margin:0;font:700 clamp(30px,2.9vw,50px)/1.08 var(--rub);color:var(--red);text-shadow:0 0 10px var(--rglow);text-wrap:balance}
+.note{font-style:italic;color:var(--red);font-size:.88em}
+.cap{text-align:center;color:var(--ink);font-size:.8em}   /* a caption that says what a drawing means */
+.text{hyphens:auto}
+/* the first letter of the writing is illuminated: gold leaf in light, Dragon's blood in dark */
+#r-desc::first-letter{float:left;margin:.06em .16em 0 0;padding:.1em .14em .02em;font:700 3.3em/.82 var(--rub);color:var(--red);border:1.5px solid var(--ink);
+  background:linear-gradient(135deg,#d9a520,#ffd700 35%,#fff1a8 52%,#ffd700 68%,#d9a520)}
+:root[data-theme="dark"] #r-desc::first-letter{background:#6a0d0d;color:#f8e9e7;border-color:#ff7062}
+.acts{display:flex;flex-wrap:wrap;gap:0 1.4em}
+.quill{display:inline-flex;align-items:center;justify-content:center;min-height:44px;min-width:44px;padding:0 .1em;border:0;background:none;cursor:pointer;color:var(--red);font:italic 400 1em/1.2 var(--hand);
+  text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:.28em;text-shadow:inherit}
+.quill:hover,.quill:focus-visible{text-decoration-thickness:2.5px}
+.views{display:flex;flex-wrap:wrap;gap:0 .8em}
+.views .quill[aria-pressed="true"]{color:var(--ink);font-style:normal;text-decoration:none;border:1.5px solid var(--red);border-radius:50%/60%;padding:0 .6em}  /* a word circled in red */
+.close{position:absolute;top:14px;right:6%;font-size:.88em;z-index:2}
+.folio-no{position:absolute;bottom:22px;left:0;right:0;text-align:center;font-size:.82em;font-style:italic}
+.catch{position:absolute;bottom:22px;right:11%;font-size:.88em;font-style:italic}   /* the catchword: first word of the next page */
+#ix-body{flex:none}
+/* a list: contents with paragraph marks, leaders and page numbers in red */
+.ix-list ol{list-style:none;margin:0;padding:0}
+.row{display:flex;align-items:baseline;gap:.4em;width:100%;min-height:44px;padding:.1em 0;border:0;background:none;cursor:pointer;color:inherit;text-align:left;font:400 1.1em/1.3 var(--hand);text-shadow:inherit}
+.row b{color:var(--red);font-weight:400}
+.row i{flex:1;min-width:1.5em;border-bottom:2px dotted currentColor;opacity:.55;transform:translateY(-.25em)}
+.row em{font-style:normal;color:var(--red)}
+.row:hover span,.row:focus-visible span{text-decoration:underline;text-decoration-color:var(--red);text-underline-offset:.25em}
+/* rings: a seal, each work written round its own ring */
+.rings{display:block;width:100%;max-height:min(60vh,540px);margin:0 auto;overflow:visible}
+.rings .ring{cursor:pointer;outline:none}
+.rings .vis{fill:none;stroke:var(--ink);stroke-width:1.4}
+.rings .hit{fill:none;stroke:transparent;pointer-events:stroke}
+.rings text{fill:var(--ink);font:400 17px var(--hand)}
+.rings .mark{fill:var(--red);font-size:14px}
+.rings .ring:hover .vis,.rings .ring:focus-visible .vis{stroke:var(--red);stroke-width:3}
+.rings .ring:hover .nm,.rings .ring:focus-visible .nm{fill:var(--red)}
+.rings .core{fill:none;stroke:var(--ink);stroke-width:2}
+.rings .core-t{fill:var(--red);font:700 13px var(--rub);text-anchor:middle}
+.title:focus{outline:none}   /* the heading takes focus when a page opens so reading starts there; it is not a control */
+/* ribbons: silk bookmarks laid in the book, one per work */
+.ix-ribbons{display:flex;justify-content:center;gap:clamp(10px,2vw,26px);border-top:3px solid var(--gilt-2);padding-top:0}
+.rb{border:0;padding:0;background:none;cursor:pointer;transition:transform .3s}
+.rbf{display:flex;flex-direction:column;align-items:center;gap:.5em;width:clamp(48px,4.4vw,64px);height:clamp(240px,46vh,430px);padding:.7em 0 2.4em;color:var(--silk-ink);text-shadow:none;
+  background:linear-gradient(90deg,rgba(0,0,0,.2),transparent 30%,rgba(255,255,255,.14) 55%,transparent 75%,rgba(0,0,0,.22)),var(--silk);
+  clip-path:polygon(0 0,100% 0,100% 100%,50% 90%,0 100%);font:700 1.1em/1 var(--rub)}
+.rbf span{writing-mode:vertical-rl;font:400 1em/1 var(--hand)}
+.rb:hover,.rb:focus-visible{transform:translateY(10px)}
+/* slips: small papers sewn to a thread across the page */
+.ix-labels{display:flex;justify-content:space-around;align-items:flex-start;gap:12px;border-top:1.5px solid var(--ink);min-height:min(320px,44vh)}
+.tg{position:relative;flex:0 1 150px;min-width:0;margin-top:var(--h);padding:.7em .8em .7em;min-height:44px;border:1px solid var(--line-ink);background:var(--slip);color:var(--ink);cursor:pointer;
+  box-shadow:1px 3px 6px rgba(0,0,0,.3);transform:rotate(var(--rot));transform-origin:50% calc(-1 * var(--h));font:400 1em/1.25 var(--hand);text-align:left;text-shadow:inherit;transition:transform .4s}
+.tg::before{content:"";position:absolute;left:50%;bottom:100%;width:1px;height:var(--h);background:var(--ink)}
+.tg::after{content:"";position:absolute;top:5px;left:50%;width:16px;margin-left:-8px;border-top:2px dotted var(--red)}
+.tg small{display:block;margin-top:.2em;font-size:.8em;font-style:italic;color:var(--red)}
+.tg:hover,.tg:focus-visible{transform:rotate(calc(var(--rot) * -1))}
+/* a table: a ruled grid, alternate cells washed in red like a rubricated table */
+.ix-strips{display:grid;grid-template-columns:1fr 1fr;border:2px solid var(--ink)}
+.st{min-height:clamp(90px,14vh,140px);padding:.6em;border:1px solid var(--ink);background:none;color:var(--ink);cursor:pointer;font:400 1.1em/1.25 var(--hand);text-shadow:inherit}
+.st:nth-child(4n+1),.st:nth-child(4n+4){background:var(--wash);color:var(--wash-ink);text-shadow:none}
+.st:hover span,.st:focus-visible span{text-decoration:underline;text-underline-offset:.25em}
+/* one page instead of a spread: both pages' contents flow into a single page */
+@media (max-width:899px),(max-aspect-ratio:1/1),(max-height:600px){
+  .pages{top:8px;bottom:8px;left:0;right:0;width:min(calc(100% - 16px),760px);margin:0 auto;display:flex;flex-direction:column;gap:.55em;overflow-y:auto;overflow-x:hidden;padding:14px 22px 22px 28px}
+  .page{display:contents;font-size:18px}
+  .page>:not(.art){position:relative;z-index:1}
+  .close,.folio-no,.catch{inset:auto}   /* they sit in the flow here, so their spread-mode offsets must not apply */   /* the pages' own stacking is gone here, so lift the writing above the painted canvas */
+  .verso .art,.verso .folio-no,.verso .cap{display:none}
+  .cap.only-single{display:block}
+  .only-single{display:block}
+  .close{position:static;order:-1;align-self:flex-end}
+  .art.seal{width:min(64%,240px)}
+  .art.fill{flex:1 0 110px}
+  .folio-no,.catch{position:static;order:10}
+  .catch{order:11;align-self:flex-end;margin-top:-1.55em}
+  .ix-labels{flex-direction:column;gap:12px;border-top:0;border-left:1.5px solid var(--ink);min-height:0}
+  .tg{flex:none;margin:0 0 0 var(--h);transform-origin:calc(-1 * var(--h)) 50%}
+  .tg::before{left:auto;right:100%;bottom:auto;top:50%;width:var(--h);height:1px}
+  .rbf{height:300px}
+}
+
+/* L3 full bleed: when idle, only the book, the name and the theme switch remain */
+.top .right>:not(.neu),.dock{transition:opacity .6s ease,visibility .6s}
+body.idle .top .right>:not(.neu),body.idle .dock{opacity:0;visibility:hidden}
+
+/* LD2 rune ring round an LD3 grain sphere, shown until the book is ready */
+.loader{position:fixed;inset:0;z-index:60;display:grid;place-items:center;background:var(--bg);transition:opacity .6s ease,visibility .6s}
+.loader.done{opacity:0;visibility:hidden}
+.loader>*{grid-area:1/1}
+.loader svg{animation:spin 14s linear infinite}
+.gs{width:56px;height:56px;border-radius:50%;background:radial-gradient(circle,var(--fg) 0 1px,transparent 1.5px) 0 0/7px 7px,radial-gradient(circle,var(--fg) 0 .8px,transparent 1.3px) 3px 4px/5px 5px;-webkit-mask:radial-gradient(circle at 36% 30%,#000 28%,rgba(0,0,0,.3) 72%);mask:radial-gradient(circle at 36% 30%,#000 28%,rgba(0,0,0,.3) 72%);animation:gs 2.6s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes gs{to{background-position:28px 14px,23px 24px}}
+
+/* PT6 glyph ladder: a slanted row of marks crosses the screen when a project opens */
+.wipe{position:fixed;inset:0;z-index:25;pointer-events:none;overflow:hidden;visibility:hidden}
+.wipe span{position:absolute;left:-70%;top:30%;width:240%;text-align:center;white-space:nowrap;font:900 24vh/1 Arial,sans-serif;letter-spacing:.08em;color:var(--fg);transform:rotate(-18deg) translateX(-110%)}
+.wipe.go{visibility:visible}
+.wipe.go span{animation:ladder .8s cubic-bezier(.4,0,.2,1)}
+@keyframes ladder{from{transform:rotate(-18deg) translateX(-110%)}to{transform:rotate(-18deg) translateX(110%)}}
+
+
+/* dark-mode glitch burst: red and black bars torn across the page, and the text jumping */
+.tear{position:fixed;inset:0;z-index:20;pointer-events:none;display:none}
+.tear i{position:absolute;display:block}
+body.glitch .tear{display:block}
+body.glitch .brand-n{animation:jolt .16s steps(2,end) infinite;text-shadow:3px 0 #6a0d0d,-3px 0 #000}
+@keyframes jolt{0%{transform:translateX(-3px) skewX(-8deg)}50%{transform:translateX(4px) skewX(6deg)}100%{transform:translateX(-1px)}}
+
+@media (max-width:520px){
+  .wrap{padding-inline:16px}
+  .top{padding-block:8px}
+  .top .wrap{gap:4px 8px;flex-wrap:wrap}
+  .right{gap:6px;margin-left:0;width:100%;justify-content:space-between}
+  .btn{padding:8px 10px}
+  .dock-row{gap:10px}
+  .sigils{gap:5px}
+}
+/* Motion off (body.calm) or the system's reduced-motion setting: nothing drifts, spins, unfolds or slides */
+body.calm .loader svg,body.calm .gs,body.calm .pages{animation:none}
+body.calm,body.calm .aura,body.calm .tog::after,body.calm .btn,body.calm .sg,body.calm .rb,body.calm .tg,body.calm .loader,body.calm .top .right>*,body.calm .dock{transition:none}
+@media (prefers-reduced-motion:reduce){
+  body,.aura,.fog,.tog::after,.btn,.sg,.rb,.tg,.loader,.top .right>*,.dock{transition:none}
+  .fog i,.smoke i,.loader svg,.gs,.pages{animation:none}
+}

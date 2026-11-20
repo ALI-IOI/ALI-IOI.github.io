@@ -2,108 +2,116 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Rihito (ALI-IOI) – projects</title>
-<meta name="description" content="Projects by Rihito (ALI-IOI), a CSE student in Bangladesh: a cafeteria pre-order system in C++ running as WebAssembly, an orthogonal-trajectories solver, and a robotics learning journal.">
-<meta name="author" content="Rihito">
-<link rel="canonical" href="https://ali-ioi.github.io/">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://ali-ioi.github.io/">
-<meta property="og:title" content="Rihito (ALI-IOI) – projects">
-<meta property="og:description" content="C++, data structures and WebAssembly, and a robotics journal on the way to autonomous drones.">
-<meta name="twitter:card" content="summary">
-<meta name="theme-color" content="#f6f7f9" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#101318" media="(prefers-color-scheme: dark)">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23101318'/%3E%3Ctext x='16' y='23' font-family='Arial,sans-serif' font-size='19' font-weight='800' text-anchor='middle' fill='%23ffffff'%3ER%3C/text%3E%3C/svg%3E">
-<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"Person","name":"Rihito","alternateName":"ALI-IOI","url":"https://ali-ioi.github.io/","sameAs":["https://github.com/ALI-IOI"]}
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Grimoire</title>
+<meta name="description" content="A coverless grimoire of turning pages. Turn the dial and the book stops time and opens at one of my projects.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='3' fill='%2307060d'/%3E%3Ctext x='16' y='23' font-family='Arial,sans-serif' font-size='19' font-weight='900' text-anchor='middle' fill='%23ffd700'%3EG%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" media="print" onload="this.media='all'" href="https://fonts.googleapis.com/css2?family=Almendra:ital,wght@0,400;0,700;1,400&family=Cinzel+Decorative:wght@700&family=Cormorant+Garamond:wght@500;600;700&family=EB+Garamond:wght@500;600;700&family=Fondamento:ital@0;1&family=UnifrakturMaguntia&display=swap">
+<link rel="stylesheet" href="css/main.css?v=23">
+<script>
+/* set the theme before first paint: saved choice wins, otherwise the system setting */
+(function(){var t=null;try{t=localStorage.getItem("grimoire-theme");}catch(e){}
+if(t!=="light"&&t!=="dark")t=matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light";
+document.documentElement.setAttribute("data-theme",t);})();
 </script>
-<style>
-  :root {
-    --bg: #f6f7f9; --surface: #ffffff; --ink: #14181f; --muted: #545c69; --line: #dde1e7;
-    --accent: #0b5cad; --accent-ink: #ffffff; --tag: #eef1f5;
-    --radius: 14px;
-    --font: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans", Arial, sans-serif;
-  }
-  @media (prefers-color-scheme: dark) {
-    :root { --bg: #101318; --surface: #171b22; --ink: #e9edf2; --muted: #a3acb9; --line: #2a303a;
-            --accent: #6cb0ff; --accent-ink: #0b1220; --tag: #222833; }
-  }
-  * { box-sizing: border-box; }
-  html { -webkit-text-size-adjust: 100%; }
-  body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.6 var(--font); }
-  a { color: var(--accent); }
-  a:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
-  .wrap { max-width: 880px; margin: 0 auto; padding: 0 16px; }
-  header { padding: 72px 0 40px; }
-  h1 { font-size: clamp(2rem, 6vw, 3rem); line-height: 1.1; margin: 0 0 12px; letter-spacing: -0.02em; }
-  h1 small { display: block; font-size: 1rem; font-weight: 600; color: var(--muted); letter-spacing: 0; margin-top: 8px; }
-  .lede { font-size: 1.125rem; color: var(--muted); max-width: 38rem; margin: 0; }
-  h2 { font-size: 0.8125rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); margin: 0 0 16px; }
-  .projects { list-style: none; margin: 0; padding: 0; display: grid; gap: 16px; }
-  .card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 24px; }
-  .card h3 { font-size: 1.25rem; margin: 0 0 8px; }
-  .card p { margin: 0 0 16px; color: var(--muted); }
-  .tags { list-style: none; margin: 0 0 20px; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
-  .tags li { background: var(--tag); border-radius: 999px; padding: 2px 10px; font-size: 0.8125rem; color: var(--ink); }
-  .links { display: flex; flex-wrap: wrap; gap: 12px; }
-  .btn { display: inline-block; padding: 8px 16px; border-radius: 8px; font-weight: 600; text-decoration: none; border: 1px solid var(--accent); }
-  .btn--primary { background: var(--accent); color: var(--accent-ink); }
-  .btn--plain { color: var(--accent); }
-  .logins { margin: 0 0 16px; padding-left: 20px; color: var(--muted); }
-  section { padding: 24px 0 48px; }
-  footer { border-top: 1px solid var(--line); padding: 24px 0 48px; color: var(--muted); font-size: 0.9375rem; }
-</style>
 </head>
 <body>
-<div class="wrap">
-  <header>
-    <h1>Rihito <small>ALI-IOI on GitHub</small></h1>
-    <p class="lede">CSE student in Bangladesh. C++, data structures and WebAssembly. Teaching myself robotics on the way to autonomous drones (Flight Path 2029).</p>
-  </header>
+<noscript><style>.loader{display:none}</style><p class="nojs">The grimoire needs JavaScript. My projects: <a href="https://ali-ioi.github.io/CAFETERIA-PRE-ORDER-SYSTEM/">Cafeteria Pre-Order System</a>, <a href="https://ali-ioi.github.io/INFINITE-APPROXIMATION/">Infinite Approximation</a>, <a href="https://ali-ioi.github.io/RIHITOS-JOURNAL/">Rihito's Journal</a>, <a href="https://ali-ioi.github.io/">Home Page</a>.</p></noscript>
 
-  <main>
-    <section aria-labelledby="projects">
-      <h2 id="projects">Projects</h2>
-      <ul class="projects">
-        <li class="card">
-          <h3>Cafeteria pre-order system</h3>
-          <p>Everyone at the university reserves freshly cooked food before a cutoff, the kitchen marks it ready and everyone gets an email. A C++17 server built on hand-made data structures (array, linked list, circular queue, stack), with Argon2 password hashing. The live demo runs the real C++ server in your browser as WebAssembly.</p>
-          <ul class="tags" aria-label="Built with"><li>C++17</li><li>Data structures</li><li>WebAssembly</li><li>libsodium</li></ul>
-          <ul class="logins">
-            <li>Students, teachers and university staff: <a href="https://ali-ioi.github.io/CAFETERIA-PRE-ORDER-SYSTEM/login.html">public login</a></li>
-            <li>Cafeteria staff: <a href="https://ali-ioi.github.io/CAFETERIA-PRE-ORDER-SYSTEM/staff/login.html">staff login</a></li>
-          </ul>
-          <div class="links">
-            <a class="btn btn--primary" href="https://ali-ioi.github.io/CAFETERIA-PRE-ORDER-SYSTEM/">Live demo</a>
-            <a class="btn btn--plain" href="https://github.com/ALI-IOI/CAFETERIA-PRE-ORDER-SYSTEM">Source code</a>
-          </div>
-        </li>
-        <li class="card">
-          <h3>INFINITE-APPROXIMATION</h3>
-          <p>Type a family of curves and see its orthogonal trajectories, with a right-angle mark at every crossing. All the mathematics is written in C++ and runs in the browser as WebAssembly.</p>
-          <ul class="tags" aria-label="Built with"><li>C++</li><li>WebAssembly</li><li>Differential equations</li></ul>
-          <div class="links">
-            <a class="btn btn--primary" href="https://ali-ioi.github.io/INFINITE-APPROXIMATION/">Open it</a>
-            <a class="btn btn--plain" href="https://github.com/ALI-IOI/INFINITE-APPROXIMATION">Source code</a>
-          </div>
-        </li>
-        <li class="card">
-          <h3>Rihito's Journal</h3>
-          <p>My Flight Path 2029 tracker: every build, gate and test flight from a first Arduino circuit to ESP32, ROS 2, autonomous drones and a research Masters, with a daily tracker.</p>
-          <ul class="tags" aria-label="Built with"><li>JavaScript</li><li>three.js</li><li>Robotics</li></ul>
-          <div class="links">
-            <a class="btn btn--primary" href="https://ali-ioi.github.io/RIHITOS-JOURNAL/">Open the journal</a>
-            <a class="btn btn--plain" href="https://github.com/ALI-IOI/RIHITOS-JOURNAL">Source code</a>
-          </div>
-        </li>
-      </ul>
-    </section>
-  </main>
+<canvas id="scene" aria-hidden="true"></canvas>
+<div class="aura" aria-hidden="true"></div>
+<div class="fog" aria-hidden="true"><i></i><i></i></div>
+<div class="smoke" aria-hidden="true"><i></i><i></i><i></i></div>
+<div class="vignette" aria-hidden="true"></div>
+<div class="tear" id="tear" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+<div class="wipe" id="wipe" aria-hidden="true"><span>△◇○▽✕＋△◇○▽✕＋△◇○▽✕＋</span></div>
 
-  <footer>
-    <p>More on GitHub: <a href="https://github.com/ALI-IOI">github.com/ALI-IOI</a></p>
-  </footer>
+<div class="loader" id="loader" role="status">
+  <svg viewBox="0 0 120 120" width="150" height="150" aria-hidden="true"><defs><path id="rune-ring" d="M60 60m-46 0a46 46 0 1 1 92 0a46 46 0 1 1-92 0"/></defs><circle cx="60" cy="60" r="35" fill="none" stroke="currentColor"/><text fill="currentColor" font-family="Arial,sans-serif" font-size="13" letter-spacing="5"><textPath href="#rune-ring">△◇○▽✕＋△◇○▽✕＋△◇○▽✕＋△◇○▽✕＋</textPath></text></svg>
+  <i class="gs" aria-hidden="true"></i>
+  <span class="sr">Loading the grimoire</span>
 </div>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="./"><span class="brand-n">Grimoire</span></a>
+    <div class="right">
+      <button class="btn" id="index-open" type="button">Index</button>
+      <button class="btn" id="motion" type="button" hidden><span id="motion-text"></span></button>
+      <span class="neu"><button class="tog" id="mode" type="button" role="switch" aria-checked="false" aria-label="Dark mode"></button></span>
+    </div>
+  </div>
+</header>
+
+<main class="stage" id="stage" aria-label="A coverless grimoire of turning pages, hovering and rotating. Drag to spin it.">
+  <p class="nogl glass" id="nogl" hidden>The 3D grimoire needs WebGL, which this browser has switched off. The dial below and the Index button above still open every project.</p>
+</main>
+
+<!-- The two full-size spreads. Text is real HTML; the paper, ruling, seals, tables and the lines of
+     handwriting around it are drawn on the canvas behind by js/site.js with the book's own pen (js/ink.js). -->
+<dialog class="leaf" id="reader" aria-labelledby="r-name">
+  <div class="pages">
+    <canvas class="leaf-art" aria-hidden="true"></canvas>
+    <div class="page verso">
+      <div class="art rubric" data-art="rubric" aria-hidden="true"></div>
+      <div class="art seal" data-art="seal" aria-hidden="true"></div>
+      <p class="note cap seal-cap"></p>
+      <div class="art fill" data-art="script" aria-hidden="true"></div>
+      <p class="folio-no" id="r-fol-l"></p>
+    </div>
+    <div class="page recto">
+      <button class="quill close" id="r-close" type="button">Close the book</button>
+      <div class="art seal only-single" data-art="seal" aria-hidden="true"></div>
+      <p class="note cap seal-cap only-single" aria-hidden="true"></p>
+      <h2 class="title" id="r-name" tabindex="-1" autofocus></h2>
+      <p class="note" id="r-kind"></p>
+      <p class="text" id="r-desc"></p>
+      <p class="acts"><a class="quill" id="r-link" target="_blank" rel="noopener">Visit the project<span class="sr"> (opens in a new tab)</span></a> <button class="quill" id="r-again" type="button">Turn to another page</button></p>
+      <div class="art fill" data-art="script" aria-hidden="true"></div>
+      <p class="folio-no" id="r-page"></p>
+      <p class="catch" id="r-catch" aria-hidden="true"></p>
+    </div>
+  </div>
+</dialog>
+
+<dialog class="leaf" id="index" aria-labelledby="ix-h">
+  <div class="pages">
+    <canvas class="leaf-art" aria-hidden="true"></canvas>
+    <div class="page verso">
+      <h2 class="title" id="ix-h" tabindex="-1" autofocus>Contents</h2>
+      <p class="text">Here are set down the works kept in this book. Choose how the contents are written:</p>
+      <p class="views" id="ix-views" role="group" aria-label="Index style">
+        <button class="quill" type="button" data-v="list" aria-pressed="true">a list</button>
+        <button class="quill" type="button" data-v="rings" aria-pressed="false">rings</button>
+        <button class="quill" type="button" data-v="ribbons" aria-pressed="false">ribbons</button>
+        <button class="quill" type="button" data-v="labels" aria-pressed="false">slips</button>
+        <button class="quill" type="button" data-v="strips" aria-pressed="false">a table</button>
+      </p>
+      <div class="art table" data-art="table" aria-hidden="true"></div>
+      <p class="note cap">The hours of the planets: a column for each day from Sunday, a row for each hour from sunrise.</p>
+      <div class="art fill" data-art="script" aria-hidden="true"></div>
+      <p class="folio-no" aria-hidden="true">Page 1 of ∞</p>
+    </div>
+    <div class="page recto">
+      <button class="quill close" id="ix-close" type="button">Close the book</button>
+      <div id="ix-body"></div>
+      <div class="art fill" data-art="script" aria-hidden="true"></div>
+      <p class="folio-no" aria-hidden="true">Page 2 of ∞</p>
+    </div>
+  </div>
+</dialog>
+
+<footer class="dock">
+  <div class="dock-row">
+    <nav class="sigils" id="sigils" aria-label="Projects, one mark each"></nav>
+  </div>
+</footer>
+
+<script src="vendor/three.min.js"></script>
+<script src="js/ink.js?v=23"></script>
+<script src="js/grimoire.js?v=23"></script>
+<script src="js/site.js?v=23"></script>
 </body>
 </html>
