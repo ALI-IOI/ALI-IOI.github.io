@@ -10,4 +10,4 @@ Turn the book, or click it, to open one project on a page of the grimoire. The I
 | INFINITE-APPROXIMATION (orthogonal trajectories) | [site](https://ali-ioi.github.io/INFINITE-APPROXIMATION/) | [repo](https://github.com/ALI-IOI/INFINITE-APPROXIMATION) |
 | Rihito's Journal (robotics tracker) | [site](https://ali-ioi.github.io/RIHITOS-JOURNAL/) | [repo](https://github.com/ALI-IOI/RIHITOS-JOURNAL) |
 
-Static files only: `index.html`, `css/`, `js/`, and `vendor/three.min.js` (three.js, MIT licence). The paper texture is CC0, see `assets/paper/SOURCE.txt`.
+Static files only: `index.html`, `css/`, `js/`, `assets/og-image.jpg`, and `vendor/three.min.js` (three.js, MIT licence). The paper texture is CC0, see `assets/paper/SOURCE.txt`.
