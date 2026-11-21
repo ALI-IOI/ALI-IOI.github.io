@@ -97,6 +97,7 @@ body.calm .fog i,body.calm .smoke i{animation-play-state:paused}
 .dock{position:fixed;z-index:30;left:0;right:0;bottom:calc(env(safe-area-inset-bottom,0px) + 16px);display:flex;flex-direction:column;align-items:center;gap:10px;pointer-events:none}
 .dock>*{pointer-events:auto}
 .dock-row{display:flex;align-items:center;gap:18px}
+.credit{margin:0;padding:0 16px;font:500 12px/1.4 var(--f-body);letter-spacing:.02em;color:var(--muted);text-align:center;text-shadow:0 0 6px var(--bg),0 0 12px var(--bg)}
 .sigils{display:flex;gap:8px}
 .sg{width:44px;height:44px;border-radius:50%;border:1.5px solid var(--fg);background:var(--bg);background:color-mix(in srgb,var(--bg) 70%,transparent);cursor:pointer;display:grid;place-items:center;font:500 16px/1 Arial,sans-serif;transition:background .25s,color .25s,border-color .25s}
 .sg[aria-current="true"]{background:var(--fill);border-color:var(--fill);color:var(--on-fill)}
